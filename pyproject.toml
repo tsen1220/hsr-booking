@@ -1,0 +1,43 @@
+[project]
+name = "hsr-booking-assistant"
+version = "1.0.0"
+description = "Automated booking assistant for Taiwan High Speed Rail (THSR) using Playwright and OCR captcha solving"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "ddddocr>=1.5.6",
+    "flet>=0.80.2",
+    "playwright>=1.57.0",
+    "pytest>=9.0.2",
+    "pytest-cov>=6.0.0",
+    "python-dotenv>=1.2.1",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["test"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "--cov=src",
+    "--cov-report=term-missing",
+    "--cov-report=html",
+    "--cov-report=xml",
+    "-v"
+]
+
+[tool.coverage.run]
+source = ["src"]
+omit = ["src/gui.py", "test/*", "*/__pycache__/*"]
+
+[tool.coverage.report]
+precision = 2
+show_missing = true
+skip_covered = false
+exclude_lines = [
+    "pragma: no cover",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+    "raise AssertionError",
+    "raise NotImplementedError"
+]
